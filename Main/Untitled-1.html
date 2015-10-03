@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>jQuery animation example</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <style>
+      #plane{
+        position:relative; 
+        top:0px; 
+        background-image: url("i/belt.png");
+        background-repeat: no-repeat; 
+        display:block;
+        height:500px; 
+        width:1000px;
+      }
+    </style>
+  </head>
+  
+  <body style="overflow:hidden">
+  <style>
+#background{
+    background: url("http://dl.dropbox.com/u/34829763/americasrole/background.png");
+    width:1024px;
+    height:768px;
+    overflow: hidden;
+}
+
+      
+      #cloud1{
+/*          background-image: url("i/belt.png");*/
+    position: absolute;
+          width: 59px;
+          height: 59px;
+    left: 100px;
+    top:10px;
+
+}
+#cloud2{
+    position: absolute;
+    left: 10px;
+    top:150px;
+    width:170px;
+    height:99px;
+}
+#cloud3{
+    position: absolute;
+   left: -150px;
+    top:250px;
+}
+
+#cloud4{
+    position: absolute;
+    left: 400px;*/
+    top:100px;*/
+    width:170px;
+    height:99px;
+}
+      </style>
+  
+<div id="background">
+    <img class= "cloud" id="cloud1" src="i/normandy.png"/>
+   <img class= "cloud" id="cloud2" src="i/normandy.png"/>
+   <img class= "cloud" id="cloud3" src="i/normandy.png"/>
+   <img class= "cloud" id="cloud4" src="i/normandy.png"/>
+</div>
+<div id="foreground">
+    <img id="fg" src="http://dl.dropbox.com/u/34829763/americasrole/foreground.png"/>
+</div>
+   
+    <span id="plane"></span>
+  
+    <script>
+      $(document).ready(function() {
+
+    function runIt(item$) {
+        var animWidth = Math.min($(window).width(), $("#background").width());
+        var numRand = Math.floor(Math.random()*6000) + 7000;
+        item$.animate({left: (animWidth + item$.width()) + "px"}, numRand, 'linear', function() {
+            item$.css("left", -item$.width());   // set back to just off the left side of the screen
+            runIt(item$);            // start again
+        });
+    }
+
+    // start each cloud separately
+    $('.cloud').each(function() {
+        runIt($(this));
+    });
+
+    });
+    </script>
+  </body>
+</html>
